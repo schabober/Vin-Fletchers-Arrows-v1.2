@@ -28,6 +28,7 @@ public class Arrow
     }
     public float ArrowValue()
     {
+        totalCost = 0;
         switch (arrowHead)
         {
             case ArrowHeads.Steel:
