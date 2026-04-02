@@ -1,0 +1,143 @@
+﻿Console.Title = "Vin Fletchers Arrows v1.2";
+Console.WriteLine("Welcome to Vin Fletchers Arrows");
+Console.WriteLine("Would you like to build an arrow? yes or no?");
+string theirInput = Console.ReadLine();
+    if (theirInput.ToLower() == "yes")
+    {
+        ArrowBuilder build = new ArrowBuilder();
+        Arrow arrow = build.MakeCustomArrow();
+        Console.WriteLine($"You Selected {arrow.arrowHead} head with {arrow.arrowFletching} fletching at {arrow.arrowLength}cm length. "); 
+        Console.WriteLine($"your total cost is {arrow.totalCost} ");
+        Console.ReadKey(true);
+        
+    }
+
+
+public class Arrow
+{
+    public float totalCost;
+    public ArrowHeads arrowHead;
+    public ArrowFletching arrowFletching;
+    public float arrowLength;
+    public Arrow(ArrowHeads head,ArrowFletching fletching,float length)
+    {
+        arrowHead = head;
+        arrowFletching = fletching;
+        arrowLength = length;
+        ArrowValue();
+    }
+    public float ArrowValue()
+    {
+        switch (arrowHead)
+        {
+            case ArrowHeads.Steel:
+                totalCost += 10f;
+                break;
+            case ArrowHeads.Obsidian:
+                totalCost += 5f;
+                break;
+            case ArrowHeads.Wood:
+                totalCost += 3f;
+                break;
+        }
+
+        switch (arrowFletching)
+        {
+            case ArrowFletching.Plastic:
+                totalCost += 10f;
+                break;
+            case ArrowFletching.TurkeyFeathers:
+                totalCost += 5f;
+                break;
+            case ArrowFletching.GooseFeathers:
+                totalCost += 3f;
+                break;
+        }
+
+        totalCost += (arrowLength * .05f);
+        return totalCost;
+    }
+    
+}
+
+public class ArrowBuilder()
+{ 
+    public Arrow MakeCustomArrow()
+    {
+        ArrowHeads arrowHead;
+        ArrowFletching arrowFletching;
+        float arrowLength;
+        
+        
+        while (true) // selecting the arrowhead type
+        {
+            Console.Write("Hello adventurer which kind of arrow head do you wish to have? I have steel, wood and obsidian. ");
+            string input = Console.ReadLine();
+            switch (input.ToLower())
+            {
+                case "steel":
+                    arrowHead = ArrowHeads.Steel;
+                    break;
+                case "wood":
+                    arrowHead = ArrowHeads.Wood;
+                    break;
+                case "obsidian":
+                    arrowHead = ArrowHeads.Obsidian;
+                    break;
+                default:
+                    Console.WriteLine("You did not enter a valid option, try again.");
+                    continue;
+            }
+
+            break;
+        }
+
+        while (true) // selecting the fletching type
+        {
+            Console.Write("Select a fletching type. We have plastic, turkey feathers and goose feathers. ");
+            string input = Console.ReadLine();
+            switch (input.ToLower())
+            {
+                case "plastic":
+                    arrowFletching = ArrowFletching.Plastic;
+                    break;
+                case "turkey feathers":
+                    arrowFletching = ArrowFletching.TurkeyFeathers;
+                    break;
+                case "goose feathers":
+                    arrowFletching = ArrowFletching.GooseFeathers;
+                    break;
+                default:
+                    Console.WriteLine("You did not enter a valid option, try again.");
+                    continue;
+            }
+
+            break;
+        }
+
+        //length selection
+        do
+        {
+            Console.Write("Which length arrow are you looking to get I can only make 60 - 100cm lengths. ");
+            arrowLength = Convert.ToSingle(Console.ReadLine());
+        } while (arrowLength > 100 || arrowLength < 60);
+        
+        return new Arrow(arrowHead, arrowFletching, arrowLength);
+    }
+    
+}
+
+public enum ArrowHeads
+
+{
+    Steel,
+    Wood,
+    Obsidian
+}
+
+public enum ArrowFletching
+{
+    Plastic,
+    TurkeyFeathers,
+    GooseFeathers
+}
