@@ -7,7 +7,8 @@ string theirInput = Console.ReadLine();
         ArrowBuilder build = new ArrowBuilder();
         Arrow arrow = build.MakeCustomArrow();
         Console.WriteLine($"You Selected {arrow.arrowHead} head with {arrow.arrowFletching} fletching at {arrow.arrowLength}cm length. "); 
-        Console.WriteLine($"your total cost is {arrow.totalCost} ");
+        Console.WriteLine($"your total cost is {arrow.totalCost} gold.");
+        
         Console.ReadKey(true);
         
     }
