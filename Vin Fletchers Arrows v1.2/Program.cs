@@ -26,8 +26,8 @@ public class Arrow
     private float arrowLength;
     public float ReadTotalCost => totalCost;
     public ArrowHeads ReadArrowHead => arrowHead;
-    public ArrowFletching ReadArrowFletching => arrowFletching;
     public float ReadArrowLength => arrowLength;
+    public string ReadArrowFletching => AddSpace(arrowFletching);
     public Arrow(ArrowHeads head,ArrowFletching fletching,float length)
     {
         arrowHead = head;
@@ -69,6 +69,20 @@ public class Arrow
         totalCost = _cost;
         return totalCost;
     }
+
+    private string AddSpace(ArrowFletching fletching)
+    {
+        switch (fletching)
+        {
+            case ArrowFletching.TurkeyFeathers:
+                return "Turkey Feathers";
+            case ArrowFletching.GooseFeathers:
+                return "Goose Feathers";
+            default:
+                return fletching.ToString();
+        }
+    }
+    
     
 }
 
