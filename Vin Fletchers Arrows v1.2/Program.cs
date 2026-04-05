@@ -5,9 +5,13 @@ string theirInput = Console.ReadLine();
     if (theirInput.ToLower() == "yes")
     {
         ArrowBuilder build = new ArrowBuilder();
+        ArrowBuilder build2 = new ArrowBuilder();
         Arrow arrow = build.MakeCustomArrow();
+        Arrow arrow2 = build2.MakeCustomArrow();
         Console.WriteLine($"You Selected {arrow.ReadArrowHead} head with {arrow.ReadArrowFletching} fletching at {arrow.ReadArrowLength}cm length. "); 
-        Console.WriteLine($"your total cost is {arrow.ReadTotalCost} gold.");
+        Console.WriteLine($"Your total cost is {arrow.ReadTotalCost} gold.");
+        Console.WriteLine($"You selected {arrow2.ReadArrowHead} head with {arrow2.ReadArrowFletching} fletching at {arrow2.ReadArrowLength}cm length. ");
+        Console.WriteLine($"Your total cost is {arrow2.ReadTotalCost} gold.");
         Console.ReadKey(true);
         
     }
