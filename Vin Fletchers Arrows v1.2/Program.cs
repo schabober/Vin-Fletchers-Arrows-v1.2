@@ -6,9 +6,8 @@ string theirInput = Console.ReadLine();
     {
         ArrowBuilder build = new ArrowBuilder();
         Arrow arrow = build.MakeCustomArrow();
-        Console.WriteLine($"You Selected {arrow.arrowHead} head with {arrow.arrowFletching} fletching at {arrow.arrowLength}cm length. "); 
-        Console.WriteLine($"your total cost is {arrow.totalCost} gold.");
-        
+        Console.WriteLine($"You Selected {arrow.ArrowHead} head with {arrow.ArrowFletching} fletching at {arrow.ArrowLength}cm length. "); 
+        Console.WriteLine($"your total cost is {arrow.TotalCost} gold.");
         Console.ReadKey(true);
         
     }
@@ -16,10 +15,14 @@ string theirInput = Console.ReadLine();
 
 public class Arrow
 {
-    public float totalCost;
-    public ArrowHeads arrowHead;
-    public ArrowFletching arrowFletching;
-    public float arrowLength;
+    private float totalCost;
+    private ArrowHeads arrowHead;
+    private ArrowFletching arrowFletching;
+    private float arrowLength;
+    public float TotalCost => totalCost;
+    public ArrowHeads ArrowHead => arrowHead;
+    public ArrowFletching ArrowFletching => arrowFletching;
+    public float ArrowLength => arrowLength;
     public Arrow(ArrowHeads head,ArrowFletching fletching,float length)
     {
         arrowHead = head;
@@ -27,50 +30,52 @@ public class Arrow
         arrowLength = length;
         ArrowValue();
     }
-    public float ArrowValue()
+    private float ArrowValue()
     {
-        totalCost = 0;
+        float _cost = 0f;
+        
         switch (arrowHead)
         {
             case ArrowHeads.Steel:
-                totalCost += 10f;
+                _cost += 10f;
                 break;
             case ArrowHeads.Obsidian:
-                totalCost += 5f;
+                _cost += 5f;
                 break;
             case ArrowHeads.Wood:
-                totalCost += 3f;
+                _cost += 3f;
                 break;
         }
 
         switch (arrowFletching)
         {
             case ArrowFletching.Plastic:
-                totalCost += 10f;
+                _cost += 10f;
                 break;
             case ArrowFletching.TurkeyFeathers:
-                totalCost += 5f;
+                _cost += 5f;
                 break;
             case ArrowFletching.GooseFeathers:
-                totalCost += 3f;
+                _cost += 3f;
                 break;
         }
 
-        totalCost += (arrowLength * .05f);
+        _cost += (arrowLength * .05f);
+        totalCost = _cost;
         return totalCost;
     }
     
 }
 
-public class ArrowBuilder()
-{ 
+public class ArrowBuilder
+{
+    private ArrowHeads arrowHead; 
+    private ArrowFletching arrowFletching;
+    private float arrowLength; 
+            
     public Arrow MakeCustomArrow()
-    {
-        ArrowHeads arrowHead;
-        ArrowFletching arrowFletching;
-        float arrowLength;
-        
-        
+
+{
         while (true) // selecting the arrowhead type
         {
             Console.Write("Hello adventurer which kind of arrow head do you wish to have? I have steel, wood and obsidian. ");
