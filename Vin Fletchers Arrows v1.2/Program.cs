@@ -6,8 +6,8 @@ string theirInput = Console.ReadLine();
     {
         ArrowBuilder build = new ArrowBuilder();
         Arrow arrow = build.MakeCustomArrow();
-        Console.WriteLine($"You Selected {arrow.ArrowHead} head with {arrow.ArrowFletching} fletching at {arrow.ArrowLength}cm length. "); 
-        Console.WriteLine($"your total cost is {arrow.TotalCost} gold.");
+        Console.WriteLine($"You Selected {arrow.ReadArrowHead} head with {arrow.ReadArrowFletching} fletching at {arrow.ReadArrowLength}cm length. "); 
+        Console.WriteLine($"your total cost is {arrow.ReadTotalCost} gold.");
         Console.ReadKey(true);
         
     }
@@ -19,10 +19,10 @@ public class Arrow
     private ArrowHeads arrowHead;
     private ArrowFletching arrowFletching;
     private float arrowLength;
-    public float TotalCost => totalCost;
-    public ArrowHeads ArrowHead => arrowHead;
-    public ArrowFletching ArrowFletching => arrowFletching;
-    public float ArrowLength => arrowLength;
+    public float ReadTotalCost => totalCost;
+    public ArrowHeads ReadArrowHead => arrowHead;
+    public ArrowFletching ReadArrowFletching => arrowFletching;
+    public float ReadArrowLength => arrowLength;
     public Arrow(ArrowHeads head,ArrowFletching fletching,float length)
     {
         arrowHead = head;
@@ -69,14 +69,16 @@ public class Arrow
 
 public class ArrowBuilder
 {
-    private ArrowHeads arrowHead; 
-    private ArrowFletching arrowFletching;
-    private float arrowLength; 
+   
             
     public Arrow MakeCustomArrow()
 
 {
+        ArrowHeads arrowHead; 
+        ArrowFletching arrowFletching;
+        float arrowLength; 
         while (true) // selecting the arrowhead type
+        
         {
             Console.Write("Hello adventurer which kind of arrow head do you wish to have? I have steel, wood and obsidian. ");
             string input = Console.ReadLine();
