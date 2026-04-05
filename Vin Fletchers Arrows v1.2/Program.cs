@@ -5,11 +5,12 @@ string theirInput = Console.ReadLine();
     if (theirInput.ToLower() == "yes")
     {
         ArrowBuilder build = new ArrowBuilder();
-        ArrowBuilder build2 = new ArrowBuilder();
         Arrow arrow = build.MakeCustomArrow();
-        Arrow arrow2 = build2.MakeCustomArrow();
         Console.WriteLine($"You Selected {arrow.ReadArrowHead} head with {arrow.ReadArrowFletching} fletching at {arrow.ReadArrowLength}cm length. "); 
         Console.WriteLine($"Your total cost is {arrow.ReadTotalCost} gold.");
+        ArrowBuilder build2 = new ArrowBuilder();
+        Arrow arrow2 = build2.MakeCustomArrow();
+        
         Console.WriteLine($"You selected {arrow2.ReadArrowHead} head with {arrow2.ReadArrowFletching} fletching at {arrow2.ReadArrowLength}cm length. ");
         Console.WriteLine($"Your total cost is {arrow2.ReadTotalCost} gold.");
         Console.ReadKey(true);
@@ -73,72 +74,87 @@ public class Arrow
 
 public class ArrowBuilder
 {
-   
-            
-    public Arrow MakeCustomArrow()
+    //fields for all methods
+    private ArrowHeads arrowHead;
+    private ArrowFletching arrowFletching;
+    private float arrowLength;
+    //fields for all methods
 
-{
-        ArrowHeads arrowHead; 
-        ArrowFletching arrowFletching;
-        float arrowLength; 
-        while (true) // selecting the arrowhead type
-        
-        {
-            Console.Write("Hello adventurer which kind of arrow head do you wish to have? I have steel, wood and obsidian. ");
-            string input = Console.ReadLine();
-            switch (input.ToLower())
-            {
-                case "steel":
-                    arrowHead = ArrowHeads.Steel;
-                    break;
-                case "wood":
-                    arrowHead = ArrowHeads.Wood;
-                    break;
-                case "obsidian":
-                    arrowHead = ArrowHeads.Obsidian;
-                    break;
-                default:
-                    Console.WriteLine("You did not enter a valid option, try again.");
-                    continue;
-            }
-
-            break;
-        }
-
-        while (true) // selecting the fletching type
-        {
-            Console.Write("Select a fletching type. We have plastic, turkey feathers and goose feathers. ");
-            string input = Console.ReadLine();
-            switch (input.ToLower())
-            {
-                case "plastic":
-                    arrowFletching = ArrowFletching.Plastic;
-                    break;
-                case "turkey feathers":
-                    arrowFletching = ArrowFletching.TurkeyFeathers;
-                    break;
-                case "goose feathers":
-                    arrowFletching = ArrowFletching.GooseFeathers;
-                    break;
-                default:
-                    Console.WriteLine("You did not enter a valid option, try again.");
-                    continue;
-            }
-
-            break;
-        }
-
-        //length selection
-        do
-        {
-            Console.Write("Which length arrow are you looking to get I can only make 60 - 100cm lengths. ");
-            arrowLength = Convert.ToSingle(Console.ReadLine());
-        } while (arrowLength > 100 || arrowLength < 60);
-        
+    public Arrow MakeCustomArrow()//method to get all data
+    {
+        GetArrowHead();
+        GetArrowFletching();
+        GetArrowLength();
         return new Arrow(arrowHead, arrowFletching, arrowLength);
     }
-    
+        private void GetArrowHead()
+        {
+            while (true) // selecting the arrowhead type
+
+            {
+                Console.Write(
+                    "Hello adventurer which kind of arrow head do you wish to have? I have steel, wood and obsidian. ");
+                string input = Console.ReadLine();
+                switch (input.ToLower())
+                {
+                    case "steel":
+                        arrowHead = ArrowHeads.Steel;
+                        break;
+                    case "wood":
+                        arrowHead = ArrowHeads.Wood;
+                        break;
+                    case "obsidian":
+                        arrowHead = ArrowHeads.Obsidian;
+                        break;
+                    default:
+                        Console.WriteLine("You did not enter a valid option, try again.");
+                        continue;
+                }
+
+                break;
+            }
+        }
+
+        private void GetArrowFletching()
+        {
+            while (true) // selecting the fletching type
+            {
+                Console.Write("Select a fletching type. We have plastic, turkey feathers and goose feathers. ");
+                string input = Console.ReadLine();
+                switch (input.ToLower())
+                {
+                    case "plastic":
+                        arrowFletching = ArrowFletching.Plastic;
+                        break;
+                    case "turkey feathers":
+                        arrowFletching = ArrowFletching.TurkeyFeathers;
+                        break;
+                    case "goose feathers":
+                        arrowFletching = ArrowFletching.GooseFeathers;
+                        break;
+                    default:
+                        Console.WriteLine("You did not enter a valid option, try again.");
+                        continue;
+                }
+
+                break;
+
+            }
+        }
+
+        private void GetArrowLength()
+        
+        {
+            //length selection
+            do
+            {
+                Console.Write("Which length arrow are you looking to get I can only make 60 - 100cm lengths. ");
+                arrowLength = Convert.ToSingle(Console.ReadLine());
+            } while (arrowLength > 100 || arrowLength < 60);
+        }
 }
+
+
 
 public enum ArrowHeads
 
