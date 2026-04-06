@@ -1,5 +1,6 @@
 ﻿Console.Title = "Vin Fletchers Arrows v1.2";
 //updated for Vin's Trouble
+//updated for the properties of arrows
 Console.WriteLine("Welcome to Vin Fletchers Arrows");
 Console.WriteLine("Would you like to build an arrow? yes or no?");
 string theirInput = Console.ReadLine();
@@ -29,7 +30,7 @@ public class Arrow
     //private fields with an _underScore
     
     //public properties with UpperCamelCase
-    public float TotalCost { get; } //_totalCost;
+    public float TotalCost => _totalCost;
     public ArrowHeads ArrowHead { get; } //_arrowHead;
     public float ArrowLength { get; } //_arrowLength;
 
@@ -37,9 +38,9 @@ public class Arrow
     //public properties with UpperCamelCase
     public Arrow(ArrowHeads head,ArrowFletching fletching,float length)
     {
-        _arrowHead = head;
+        ArrowHead = head;
         _arrowFletching = fletching;
-        _arrowLength = length;
+        ArrowLength = length;
         ArrowValue();
     }
     private float ArrowValue()
