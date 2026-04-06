@@ -1,4 +1,5 @@
 ﻿Console.Title = "Vin Fletchers Arrows v1.2";
+//updated for Vin's Trouble
 Console.WriteLine("Welcome to Vin Fletchers Arrows");
 Console.WriteLine("Would you like to build an arrow? yes or no?");
 string theirInput = Console.ReadLine();
@@ -107,7 +108,7 @@ public class ArrowBuilder
 
             {
                 Console.Write(
-                    "Hello adventurer which kind of arrow head do you wish to have? I have steel, wood and obsidian. ");
+                    "Which kind of arrow head do you wish to have? I have steel, wood and obsidian. ");
                 string input = Console.ReadLine();
                 switch (input.ToLower())
                 {
