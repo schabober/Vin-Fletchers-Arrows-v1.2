@@ -30,9 +30,10 @@ public class Arrow
     //private fields with an _underScore
     
     //public properties with UpperCamelCase
-    public float TotalCost => _totalCost;
-    public ArrowHeads ArrowHead { get; } //_arrowHead;
-    public float ArrowLength { get; } //_arrowLength;
+    public float TotalCost { get; private set; } //_totalCost;
+
+    public ArrowHeads ArrowHead { get; private set; } //_arrowHead;
+    public float ArrowLength { get; private set; } //_arrowLength;
 
     public string ArrowFletching => AddSpace(_arrowFletching);
     //public properties with UpperCamelCase
@@ -47,7 +48,7 @@ public class Arrow
     {
         float _cost = 0f;
         
-        switch (_arrowHead)
+        switch (ArrowHead)
         {
             case ArrowHeads.Steel:
                 _cost += 10f;
@@ -73,9 +74,9 @@ public class Arrow
                 break;
         }
 
-        _cost += (_arrowLength * .05f);
-        _totalCost = _cost;
-        return _totalCost;
+        _cost += (ArrowLength * .05f);
+        TotalCost = _cost;
+        return TotalCost;
     }
 
     private string AddSpace(ArrowFletching fletching)
