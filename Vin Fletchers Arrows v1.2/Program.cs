@@ -7,13 +7,13 @@ string theirInput = Console.ReadLine();
     {
         ArrowBuilder build = new ArrowBuilder();
         Arrow arrow = build.MakeCustomArrow();
-        Console.WriteLine($"You Selected {arrow.ReadArrowHead} head with {arrow.ReadArrowFletching} fletching at {arrow.ReadArrowLength}cm length. "); 
-        Console.WriteLine($"Your total cost is {arrow.ReadTotalCost} gold.");
+        Console.WriteLine($"You Selected {arrow.ArrowHead} head with {arrow.ArrowFletching} fletching at {arrow.ArrowLength}cm length. "); 
+        Console.WriteLine($"Your total cost is {arrow.TotalCost} gold.");
         ArrowBuilder build2 = new ArrowBuilder();
         Arrow arrow2 = build2.MakeCustomArrow();
         
-        Console.WriteLine($"You selected {arrow2.ReadArrowHead} head with {arrow2.ReadArrowFletching} fletching at {arrow2.ReadArrowLength}cm length. ");
-        Console.WriteLine($"Your total cost is {arrow2.ReadTotalCost} gold.");
+        Console.WriteLine($"You selected {arrow2.ArrowHead} head with {arrow2.ArrowFletching} fletching at {arrow2.ArrowLength}cm length. ");
+        Console.WriteLine($"Your total cost is {arrow2.TotalCost} gold.");
         Console.ReadKey(true);
         
     }
@@ -21,26 +21,32 @@ string theirInput = Console.ReadLine();
 
 public class Arrow
 {
-    private float totalCost;
-    private ArrowHeads arrowHead;
-    private ArrowFletching arrowFletching;
-    private float arrowLength;
-    public float ReadTotalCost => totalCost;
-    public ArrowHeads ReadArrowHead => arrowHead;
-    public float ReadArrowLength => arrowLength;
-    public string ReadArrowFletching => AddSpace(arrowFletching);
+    //private fields with an _underScore
+    private float _totalCost;
+    private ArrowHeads _arrowHead;
+    private ArrowFletching _arrowFletching;
+    private float _arrowLength;
+    //private fields with an _underScore
+    
+    //public properties with UpperCamelCase
+    public float TotalCost { get; } //_totalCost;
+    public ArrowHeads ArrowHead { get; } //_arrowHead;
+    public float ArrowLength { get; } //_arrowLength;
+
+    public string ArrowFletching => AddSpace(_arrowFletching);
+    //public properties with UpperCamelCase
     public Arrow(ArrowHeads head,ArrowFletching fletching,float length)
     {
-        arrowHead = head;
-        arrowFletching = fletching;
-        arrowLength = length;
+        _arrowHead = head;
+        _arrowFletching = fletching;
+        _arrowLength = length;
         ArrowValue();
     }
     private float ArrowValue()
     {
         float _cost = 0f;
         
-        switch (arrowHead)
+        switch (_arrowHead)
         {
             case ArrowHeads.Steel:
                 _cost += 10f;
@@ -53,31 +59,31 @@ public class Arrow
                 break;
         }
 
-        switch (arrowFletching)
+        switch (_arrowFletching)
         {
-            case ArrowFletching.Plastic:
+            case global::ArrowFletching.Plastic:
                 _cost += 10f;
                 break;
-            case ArrowFletching.TurkeyFeathers:
+            case global::ArrowFletching.TurkeyFeathers:
                 _cost += 5f;
                 break;
-            case ArrowFletching.GooseFeathers:
+            case global::ArrowFletching.GooseFeathers:
                 _cost += 3f;
                 break;
         }
 
-        _cost += (arrowLength * .05f);
-        totalCost = _cost;
-        return totalCost;
+        _cost += (_arrowLength * .05f);
+        _totalCost = _cost;
+        return _totalCost;
     }
 
     private string AddSpace(ArrowFletching fletching)
     {
         switch (fletching)
         {
-            case ArrowFletching.TurkeyFeathers:
+            case global::ArrowFletching.TurkeyFeathers:
                 return "Turkey Feathers";
-            case ArrowFletching.GooseFeathers:
+            case global::ArrowFletching.GooseFeathers:
                 return "Goose Feathers";
             default:
                 return fletching.ToString();
@@ -107,8 +113,7 @@ public class ArrowBuilder
             while (true) // selecting the arrowhead type
 
             {
-                Console.Write(
-                    "Which kind of arrow head do you wish to have? I have steel, wood and obsidian. ");
+                Console.Write("Which kind of arrow head do you wish to have? I have steel, wood and obsidian. ");
                 string input = Console.ReadLine();
                 switch (input.ToLower())
                 {
