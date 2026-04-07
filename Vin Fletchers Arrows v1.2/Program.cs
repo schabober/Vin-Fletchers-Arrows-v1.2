@@ -20,80 +20,80 @@ string theirInput = Console.ReadLine();
     }
 
 
-public class Arrow
-{
-    //private fields with an _underScore
-    private float _totalCost;
-    private ArrowHeads _arrowHead;
-    private ArrowFletching _arrowFletching;
-    private float _arrowLength;
-    //private fields with an _underScore
-    
-    //public properties with UpperCamelCase
-    public float TotalCost { get; private set; } //_totalCost;
-
-    public ArrowHeads ArrowHead { get; private set; } //_arrowHead;
-    public float ArrowLength { get; private set; } //_arrowLength;
-
-    public string ArrowFletching => AddSpace(_arrowFletching);
-    //public properties with UpperCamelCase
-    public Arrow(ArrowHeads head,ArrowFletching fletching,float length)
+    public class Arrow
     {
-        ArrowHead = head;
-        _arrowFletching = fletching;
-        ArrowLength = length;
-        ArrowValue();
-    }
-    private float ArrowValue()
-    {
-        float _cost = 0f;
         
-        switch (ArrowHead)
+            //private fields with an _underScore
+        // private float _totalCost;
+        // private ArrowHeads _arrowHead;
+        // private float _arrowLength;
+        private ArrowFletching _arrowFletching;
+            //private fields with an _underScore
+        
+        //auto properties take the job of respective fields
+            //public properties with UpperCamelCase
+        public float TotalCost { get; private set; } //_totalCost;
+        public ArrowHeads ArrowHead { get; } //_arrowHead;
+        public float ArrowLength { get; } //_arrowLength;
+        public string ArrowFletching => AddSpace(_arrowFletching);
+            //public properties with UpperCamelCase
+        public Arrow(ArrowHeads head,ArrowFletching fletching,float length)
         {
-            case ArrowHeads.Steel:
-                _cost += 10f;
-                break;
-            case ArrowHeads.Obsidian:
-                _cost += 5f;
-                break;
-            case ArrowHeads.Wood:
-                _cost += 3f;
-                break;
+            ArrowHead = head;
+            _arrowFletching = fletching;
+            ArrowLength = length;
+            ArrowValue();
+        }
+        private float ArrowValue()
+        {
+            float _cost = 0f;
+        
+            switch (ArrowHead)
+            {
+                case ArrowHeads.Steel:
+                    _cost += 10f;
+                    break;
+                case ArrowHeads.Obsidian:
+                    _cost += 5f;
+                    break;
+                case ArrowHeads.Wood:
+                    _cost += 3f;
+                    break;
+            }
+
+            switch (_arrowFletching)
+            {
+                case global::ArrowFletching.Plastic:
+                    _cost += 10f;
+                    break;
+                case global::ArrowFletching.TurkeyFeathers:
+                    _cost += 5f;
+                    break;
+                case global::ArrowFletching.GooseFeathers:
+                    _cost += 3f;
+                    break;
+            }
+
+            _cost += (ArrowLength * .05f);
+            TotalCost = _cost;
+            return TotalCost;
         }
 
-        switch (_arrowFletching)
+        private string AddSpace(ArrowFletching fletching)
         {
-            case global::ArrowFletching.Plastic:
-                _cost += 10f;
-                break;
-            case global::ArrowFletching.TurkeyFeathers:
-                _cost += 5f;
-                break;
-            case global::ArrowFletching.GooseFeathers:
-                _cost += 3f;
-                break;
+            switch (fletching)
+            {
+                case global::ArrowFletching.TurkeyFeathers:
+                    return "Turkey Feathers";
+                case global::ArrowFletching.GooseFeathers:
+                    return "Goose Feathers";
+                default:
+                    return fletching.ToString();
+            }
         }
 
-        _cost += (ArrowLength * .05f);
-        TotalCost = _cost;
-        return TotalCost;
+
     }
-
-    private string AddSpace(ArrowFletching fletching)
-    {
-        switch (fletching)
-        {
-            case global::ArrowFletching.TurkeyFeathers:
-                return "Turkey Feathers";
-            case global::ArrowFletching.GooseFeathers:
-                return "Goose Feathers";
-            default:
-                return fletching.ToString();
-        }
-    }
-    
-    
-}
 
 public class ArrowBuilder
 {
