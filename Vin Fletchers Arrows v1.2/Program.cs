@@ -1,10 +1,46 @@
 ﻿Console.Title = "Vin Fletchers Arrows v1.2";
 //updated for Vin's Trouble
-//updated for the properties of arrows
+//updated for The Properties of Arrows
+//updated for Arrow Factories
 Console.WriteLine("Welcome to Vin Fletchers Arrows");
-Console.WriteLine("Would you like to build an arrow? yes or no?");
-string theirInput = Console.ReadLine();
-    if (theirInput.ToLower() == "yes")
+Console.WriteLine("Select an arrow.");
+Console.WriteLine("1 - Elite Arrow. \n2 - Beginner Arrow. \n3 - Marksman Arrow. \n4 - Custom Arrow.");
+Arrow arrow = ArrowBuilder.CreateEliteArrow(); 
+bool validInput = false;
+while (!validInput)
+{
+    string theirInput = Console.ReadLine();
+    switch (theirInput)
+    {
+    case "1":
+        arrow = ArrowBuilder.CreateEliteArrow();
+        validInput = true;
+        break;
+    case "2":
+        arrow = ArrowBuilder.CreateBeginnerArrow();
+        validInput = true;
+        break;
+    case "3":
+        arrow = ArrowBuilder.CreateMarksmanArrow();
+        validInput = true;
+        break;
+    case "4":
+        arrow = new ArrowBuilder().MakeCustomArrow();
+        validInput = true;
+        break;
+    default:
+        Console.WriteLine("You did not enter a valid option, try again.");
+    break;
+    }
+
+}
+
+Console.WriteLine($"You Selected {arrow.ArrowHead} head with {arrow.ArrowFletching} fletching at {arrow.ArrowLength}cm length. "); 
+Console.WriteLine($"Your total cost is {arrow.TotalCost} gold.");
+Console.ReadKey(true);
+
+
+/*    if (theirInput.ToLower() == "yes" )
     {
         ArrowBuilder build = new ArrowBuilder();
         Arrow arrow = build.MakeCustomArrow();
@@ -12,13 +48,12 @@ string theirInput = Console.ReadLine();
         Console.WriteLine($"Your total cost is {arrow.TotalCost} gold.");
         ArrowBuilder build2 = new ArrowBuilder();
         Arrow arrow2 = build2.MakeCustomArrow();
-        
         Console.WriteLine($"You selected {arrow2.ArrowHead} head with {arrow2.ArrowFletching} fletching at {arrow2.ArrowLength}cm length. ");
         Console.WriteLine($"Your total cost is {arrow2.TotalCost} gold.");
         Console.ReadKey(true);
         
     }
-
+*/
 
     public class Arrow
     {
@@ -115,7 +150,7 @@ public class ArrowBuilder
             while (true) // selecting the arrowhead type
 
             {
-                Console.Write("Which kind of arrow head do you wish to have? I have steel, wood and obsidian. ");
+                Console.Write("Which kind of arrow head do you wish to have? I have Steel, Obsidian and Wood. ");
                 string input = Console.ReadLine();
                 switch (input.ToLower())
                 {
@@ -141,7 +176,7 @@ public class ArrowBuilder
         {
             while (true) // selecting the fletching type
             {
-                Console.Write("Select a fletching type. We have plastic, turkey feathers and goose feathers. ");
+                Console.Write("Select a fletching type. We have Plastic, Turkey Feathers and Goose Feathers. ");
                 string input = Console.ReadLine();
                 switch (input.ToLower())
                 {
@@ -173,6 +208,25 @@ public class ArrowBuilder
                 Console.Write("Which length arrow are you looking to get I can only make 60 - 100cm lengths. ");
                 arrowLength = Convert.ToSingle(Console.ReadLine());
             } while (arrowLength > 100 || arrowLength < 60);
+        }
+
+
+
+
+         public static Arrow CreateEliteArrow()
+         //arrow is the return type
+        {
+            return new Arrow(ArrowHeads.Steel, ArrowFletching.Plastic, 95);
+        }
+         
+        public static Arrow  CreateBeginnerArrow()
+        {
+            return new Arrow(ArrowHeads.Wood, ArrowFletching.GooseFeathers, 75);
+        }
+         
+        public static Arrow CreateMarksmanArrow()
+        {
+            return new Arrow(ArrowHeads.Steel, ArrowFletching.GooseFeathers, 65);
         }
 }
 
